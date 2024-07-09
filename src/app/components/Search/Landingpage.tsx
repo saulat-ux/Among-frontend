@@ -15,6 +15,8 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { AccountCircle } from "@mui/icons-material";
+import LocationSelector from "../location/location";
+import UserDropdown from "../userProfile/userProfile";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -104,14 +106,7 @@ const LandingSearchPage = () => {
               <Typography variant="body2" sx={{ mr: 1, fontWeight: "bold" }}>
                 John Doe
               </Typography>
-              <IconButton
-                size="large"
-                edge="end"
-                color="inherit"
-                aria-label="account"
-              >
-                <AccountCircle />
-              </IconButton>
+              <UserDropdown />
             </Box>
           </Box>
         </Toolbar>
@@ -126,8 +121,8 @@ const LandingSearchPage = () => {
         }}
       >
         <Typography
-          variant="h2"
-          component="h1"
+          variant="h4"
+          component="h3"
           sx={{ mb: 4, textAlign: "center", fontWeight: "bold" }}
         >
           Social Media Content Aggregator
@@ -208,6 +203,8 @@ const LandingSearchPage = () => {
             Urdu/Hindi
           </Button>
         </Box>
+
+        <LocationSelector />
       </Box>
     </>
   );

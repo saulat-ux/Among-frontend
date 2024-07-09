@@ -14,6 +14,10 @@ import SearchResultsInstagram from "../searchResults/searchResult";
 import SearchResultsListYouTube from "../searchResults/searchResultYoutube";
 import SearchResultsListTwitter from "../searchResults/searchResultstwitter";
 import SearchResultsListFacebook from "../searchResults/searchResultsFacebook";
+import ChartsBar from "../charts/barChat";
+import InsightsSidebar from "../sidebar/InsightsBar";
+import PieArcLabel from "../charts/PiChat";
+import { Grid, Typography } from "@mui/material";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -107,7 +111,50 @@ export default function BasicTabs() {
         <SearchResultsListYouTube />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        Insights Content
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            width: "100%",
+          }}
+        >
+          <InsightsSidebar />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            <Box sx={{ flex: 1, marginBottom: 2 }}>
+              <ChartsBar />
+            </Box>
+            <Box sx={{ flex: 1 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <PieArcLabel textPosition="above" label="Facebook" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <PieArcLabel textPosition="above" label="Twitter" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <PieArcLabel textPosition="above" label="Instagram" />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <PieArcLabel textPosition="above" label="YouTube" />
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Box>
       </CustomTabPanel>
     </Box>
   );

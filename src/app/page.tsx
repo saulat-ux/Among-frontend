@@ -1,10 +1,11 @@
 import Image from "next/image";
-import GoogleSearchHome from "./components/Search/Landingpage";
+
+import LandingSearchPage from "./components/Search/Landingpage";
 
 export default function Home() {
   return (
     <main className="">
-      <GoogleSearchHome />
+      <LandingSearchPage />
     </main>
   );
 }

@@ -12,6 +12,7 @@ import { AccountCircle, Search as SearchIcon } from "@mui/icons-material";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import { styled, alpha } from "@mui/material/styles";
+import UserDropdown from "./userProfile/userProfile";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -121,14 +122,8 @@ const Layout = ({ children }) => {
               <Typography variant="body2" sx={{ mr: 1, fontWeight: "bold" }}>
                 John Doe
               </Typography>
-              <IconButton
-                size="large"
-                edge="end"
-                color="inherit"
-                aria-label="account"
-              >
-                <AccountCircle />
-              </IconButton>
+
+              <UserDropdown />
             </Box>
           </Box>
         </Toolbar>

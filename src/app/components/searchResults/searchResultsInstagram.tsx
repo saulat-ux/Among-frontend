@@ -1,7 +1,9 @@
+// @ts-nocheck
 import React from "react";
 import { Box } from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SearchResultTemplate from "../Search/searchTemplate";
+import InstagramSearchTemplate from "./InstagramSearchTemplate";
 
 const searchResultsInstagram = [
   {
@@ -47,17 +49,36 @@ const searchResultsInstagram = [
   // Add more objects as needed
 ];
 
-const SearchResultsInstagram = () => {
+const SearchResultsInstagram = ({ instaResults }) => {
   return (
     <Box>
-      {searchResultsInstagram.map((result, index) => (
-        <SearchResultTemplate
+      {instaResults.map((result, index) => (
+        // <SearchResultTemplate
+        //   key={index}
+        //   icon={<InstagramIcon />}
+        //   title={result.username}
+        //   followers="34 million followers"
+        //   // link={result.link}
+        //   img={result.media_url}
+        //   img_2={result.profile_pic_url}
+        //   comment={result.comment_count}
+        //   like={result.like_count}
+        //   caption={result.caption}
+        //   description={result.description}
+        //   friends_count={result.friends_count}
+        //   display_url={result.display_url}
+        // />
+        <InstagramSearchTemplate
           key={index}
-          icon={result.icon}
-          title={result.title}
-          followers={result.followers}
-          link={result.link}
+          title={result.username}
+          img={result.media_url}
+          img_2={result.profile_pic_url}
+          comment={result.comment_count}
+          like={result.like_count}
+          caption={result.caption}
           description={result.description}
+          friends_count={result.friends_count}
+          display_url={result.display_url}
         />
       ))}
     </Box>

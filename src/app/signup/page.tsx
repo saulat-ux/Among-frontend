@@ -74,10 +74,21 @@ export default function Signup() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4" sx={{ mr: 1, fontWeight: "bold" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              mr: 1,
+              fontWeight: "bold",
+              fontSize: "28px",
+              textTransform: "none",
+            }}
+          >
             Social Media Content Aggregator
           </Typography>
-          <Typography variant="h5" sx={{ mr: 1, fontWeight: "bold", mt: 6 }}>
+          <Typography
+            variant="h5"
+            sx={{ mr: 1, fontWeight: "bold", mt: 6, textTransform: "none" }}
+          >
             Create Account
           </Typography>
           {/* <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -139,6 +150,7 @@ export default function Signup() {
                     backgroundColor: "black",
                     px: 12,
                     py: 1,
+                    textTransform: "none",
 
                     color: "white",
                     width: 100,
@@ -181,6 +193,7 @@ export default function Signup() {
                   color: "black",
                   px: 12,
                   py: 1,
+                  textTransform: "none",
                 }}
                 startIcon={<FcGoogle />}
               >

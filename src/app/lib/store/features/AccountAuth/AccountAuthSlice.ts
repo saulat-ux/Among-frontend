@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 

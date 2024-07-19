@@ -3,7 +3,7 @@ import axios from "axios";
 // const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 // import { getCookie } from "cookies-next";
 
-const BACKEND_URL = "http://localhost:3002/";
+const BACKEND_URL = "http://localhost:3000/";
 let token = null;
 
 export const API_URL = `${BACKEND_URL}api/account/`;

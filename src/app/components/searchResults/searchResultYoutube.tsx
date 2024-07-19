@@ -1,7 +1,9 @@
+// @ts-nocheck
 import React from "react";
 import { Box } from "@mui/material";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import SearchResultTemplate from "../Search/searchTemplate";
+import YoutubeSearchTemplate from "./YoutubeSearchTemplate";
 
 const searchResultsYouTube = [
   {
@@ -47,17 +49,29 @@ const searchResultsYouTube = [
   // Add more objects as needed
 ];
 
-const SearchResultsListYouTube = () => {
+const SearchResultsListYouTube = ({ ytResults }) => {
   return (
     <Box>
-      {searchResultsYouTube.map((result, index) => (
-        <SearchResultTemplate
+      {ytResults.map((result, index) => (
+        // <SearchResultTemplate
+        //   key={index}
+        //   icon={<YouTubeIcon />}
+        //   title={result.snippet.channelTitle}
+        //   ytTitle={result.snippet.title}
+        //   followers={result.followers}
+        //   link={result.link}
+        //   description={result.snippet.description}
+        //   ytThumbnail={result.snippet.thumbnails.high.url}
+        // />
+        <YoutubeSearchTemplate
           key={index}
-          icon={result.icon}
-          title={result.title}
+          title={result.snippet.channelTitle}
+          ytTitle={result.snippet.title}
           followers={result.followers}
           link={result.link}
-          description={result.description}
+          description={result.snippet.description}
+          ytThumbnail={result.snippet.thumbnails.high.url}
+          publishTime={result.snippet.publishTime}
         />
       ))}
     </Box>

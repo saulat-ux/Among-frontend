@@ -1,7 +1,9 @@
+// @ts-nocheck
 import React from "react";
 import { Box } from "@mui/material";
 import XIcon from "@mui/icons-material/X";
 import SearchResultTemplate from "../Search/searchTemplate";
+import TwitterSearchTemplate from "./TwitterSearchTemplate";
 
 const searchResultsTwitter = [
   {
@@ -47,17 +49,38 @@ const searchResultsTwitter = [
   // Add more objects as needed
 ];
 
-const SearchResultsListTwitter = () => {
+const SearchResultsListTwitter = ({ xResults }) => {
   return (
     <Box>
-      {searchResultsTwitter.map((result, index) => (
-        <SearchResultTemplate
+      {xResults.map((result, index) => (
+        // <SearchResultTemplate
+        //   key={index}
+        //   icon={<XIcon />}
+        //   title={result.name}
+        //   category={result.category}
+        //   followers={result.followers_count}
+        //   description={result.description}
+        //   location={result.location}
+        //   favoriteCount={result.favorite_count}
+        //   friends_count={result.friends_count}
+        //   caption={result.caption}
+        //   display_url={result.display_url}
+        //   img_x={result.profile_image_url_http}
+        //   img_x2={result.profile_url}
+        // />
+        <TwitterSearchTemplate
           key={index}
-          icon={result.icon}
-          title={result.title}
-          followers={result.followers}
-          link={result.link}
+          title={result.name}
+          category={result.category}
+          followers={result.followers_count}
           description={result.description}
+          location={result.location}
+          favoriteCount={result.favorite_count}
+          friends_count={result.friends_count}
+          caption={result.caption}
+          display_url={result.display_url}
+          img_x={result.profile_image_url_http}
+          img_x2={result.profile_url}
         />
       ))}
     </Box>

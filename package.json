@@ -17,6 +17,8 @@
     "@mui/x-charts": "^7.9.0",
     "@reduxjs/toolkit": "^2.2.6",
     "axios": "^1.7.2",
+    "country-state-city": "^3.2.1",
+    "google-translate-api": "^2.3.0",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
@@ -25,7 +27,8 @@
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/axios": "^0.14.0",
+    "@types/node": "^20.14.11",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

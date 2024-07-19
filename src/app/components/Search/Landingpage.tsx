@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import PlaceIcon from "@mui/icons-material/Place";
 import LanguageIcon from "@mui/icons-material/Language";
 import {
@@ -14,14 +15,14 @@ import {
   Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { AccountCircle } from "@mui/icons-material";
 import LocationSelector from "../location/location";
 import UserDropdown from "../userProfile/userProfile";
+import axios from "axios";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: "50px", // Adjusted borderRadius to make it full
-  backgroundColor: "#808080", // Gray background color
+  borderRadius: "50px",
+  backgroundColor: "#808080",
   "&:hover": {
     backgroundColor: alpha("#808080", 0.85),
   },
@@ -55,20 +56,74 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const LandingSearchPage = () => {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLanguage, setSelectedLanguage] = useState("English");
+  const [translations, setTranslations] = useState({
+    title: "Social Media Content Aggregator",
+    searchPlaceholder: "Search…",
+    english: "English",
+    spanish: "Spanish",
+    urduHindi: "Urdu/Hindi",
+  });
 
-  const handleSearchChange = (event) => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Search query:", searchQuery);
-    // Add your search logic here, e.g., updating state or calling an API
+    router.push(`/searchresults?query=${encodeURIComponent(searchQuery)}`);
   };
-  const handleLanguageChange = (language) => {
+
+  const translateText = async (text: string, targetLanguage: string) => {
+    try {
+      console.log("Sending translation request:", { text, targetLanguage });
+      const response = await axios.post(
+        "/api/translate",
+        {
+          text,
+          targetLanguage,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Translation response:", response.data);
+      return response.data.translatedText;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        console.error(
+          "Error translating text:",
+          error.response?.data || error.message || error
+        );
+      } else {
+        console.error("Error translating text:", error);
+      }
+      return text;
+    }
+  };
+
+  const handleLanguageChange = async (language: string, langCode: string) => {
     setSelectedLanguage(language);
+
+    const translatedTexts = await Promise.all([
+      translateText("Social Media Content Aggregator", langCode),
+      translateText("Search…", langCode),
+      translateText("English", langCode),
+      translateText("Spanish", langCode),
+      translateText("Urdu/Hindi", langCode),
+    ]);
+
+    setTranslations({
+      title: translatedTexts[0],
+      searchPlaceholder: translatedTexts[1],
+      english: translatedTexts[2],
+      spanish: translatedTexts[3],
+      urduHindi: translatedTexts[4],
+    });
   };
 
   return (
@@ -125,7 +180,7 @@ const LandingSearchPage = () => {
           component="h3"
           sx={{ mb: 4, textAlign: "center", fontWeight: "bold" }}
         >
-          Social Media Content Aggregator
+          {translations.title}
         </Typography>
         <Box sx={{ width: { xs: "100%", sm: "auto" }, mx: 2 }}>
           <form onSubmit={handleSearchSubmit}>
@@ -134,7 +189,7 @@ const LandingSearchPage = () => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder={translations.searchPlaceholder}
                 value={searchQuery}
                 inputProps={{ "aria-label": "search" }}
                 onChange={handleSearchChange}
@@ -144,8 +199,8 @@ const LandingSearchPage = () => {
         </Box>
         <Box sx={{ display: "flex", mb: 4, mt: 3 }}>
           <Button
-            variant="outlined"
-            onClick={() => handleLanguageChange("English")}
+            variant={selectedLanguage === "English" ? "contained" : "outlined"}
+            onClick={() => handleLanguageChange("English", "en")}
             sx={{
               mx: 1,
               backgroundColor:
@@ -160,11 +215,11 @@ const LandingSearchPage = () => {
               },
             }}
           >
-            English
+            {translations.english}
           </Button>
           <Button
             variant={selectedLanguage === "Spanish" ? "contained" : "outlined"}
-            onClick={() => handleLanguageChange("Spanish")}
+            onClick={() => handleLanguageChange("Spanish", "es")}
             sx={{
               mx: 1,
               backgroundColor:
@@ -179,13 +234,13 @@ const LandingSearchPage = () => {
               },
             }}
           >
-            Spanish
+            {translations.spanish}
           </Button>
           <Button
             variant={
               selectedLanguage === "Urdu/Hindi" ? "contained" : "outlined"
             }
-            onClick={() => handleLanguageChange("Urdu/Hindi")}
+            onClick={() => handleLanguageChange("Urdu/Hindi", "ur")}
             sx={{
               mx: 1,
               backgroundColor:
@@ -200,10 +255,9 @@ const LandingSearchPage = () => {
               },
             }}
           >
-            Urdu/Hindi
+            {translations.urduHindi}
           </Button>
         </Box>
-
         <LocationSelector />
       </Box>
     </>

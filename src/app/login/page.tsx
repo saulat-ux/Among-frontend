@@ -31,7 +31,7 @@ function Copyright(props: any) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        Amog
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -74,7 +74,10 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4" sx={{ mr: 1, fontWeight: "bold" }}>
+          <Typography
+            variant="h4"
+            sx={{ mr: 1, fontWeight: "bold", fontSize: "28px" }}
+          >
             Social Media Content Aggregator
           </Typography>
           <Typography variant="h5" sx={{ mr: 1, fontWeight: "bold", mt: 6 }}>
@@ -139,6 +142,7 @@ export default function Login() {
                     backgroundColor: "black",
                     px: 12,
                     py: 1,
+                    textTransform: "none",
 
                     color: "white",
                     width: 100,
@@ -181,6 +185,7 @@ export default function Login() {
                   color: "black",
                   px: 12,
                   py: 1,
+                  textTransform: "none",
                 }}
                 startIcon={<FcGoogle />}
               >

@@ -3,7 +3,12 @@ import * as React from "react";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { Box, Typography } from "@mui/material";
 
-export default function BasicPie({ textPosition, label }) {
+interface BasicPieProps {
+  textPosition: string;
+  label: string;
+}
+
+export default function BasicPie({ textPosition, label }: BasicPieProps) {
   return (
     <Box
       sx={{
